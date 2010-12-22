@@ -12,7 +12,7 @@ from enthought.kiva.traits.kiva_font_trait import KivaFont
 from enthought.enable.api import black_color_trait, KeySpec
 
 from model import tcProject
-from colors import get_aggcolor_by_id
+from colors import get_aggcolor_by_id, get_colorname_by_id
 import tools
 from numpy import linspace,arange,amin,amax
 from math import log
@@ -118,7 +118,7 @@ class RangeSelectionTools(HasTraits):
             i+=1
             for cstate in sorted([i for i in cpu_stat.keys()]):
                 part = cpu_stat[cstate]
-                tmp += "C%d:%dus %02.f%%\n"%(cstate,part,part*100/(self.end-self.start))
+		tmp += "%s:%dus %02.f%%\n"%(get_colorname_by_id(cstate),part,part*100/(self.end-self.start))
         self.c_states = tmp
         self.plot.proj.process_stats(self.start,self.end)
         self._timer.Stop()
